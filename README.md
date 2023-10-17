@@ -26,5 +26,6 @@ Typically, you want your nginx serving content from something like gunicorn, bot
 
 
 TODO: write up how you added a read-only deploy key for your ssh git clone command.
-You MUST read these instructions: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys
+You MUST read these instructions, especially the bit about "Using multiple repositories on one server": https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys
+
 
