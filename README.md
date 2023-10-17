@@ -1,6 +1,6 @@
 # README.md
 
-THis is a collection of scripts to help with the setup of a continual delivery pipeline where your company policy prohibits any 'dialing in' to the local network. Which regretably means... dialing out polling.
+THis is a collection of scripts to help with the setup of a continual delivery pipeline (created for django projects but I'm sure it could easily be adapted for your needs) where your company policy prohibits any 'dialing in' to the local network. Which regretably means... dialing out polling.
 
 NOTE: Don't just run these scripts as-is, you need to configure things manually for your setup.
 
