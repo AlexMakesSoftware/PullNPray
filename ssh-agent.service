@@ -1,0 +1,9 @@
+[Unit]
+Description=SSH Agent
+
+[Service]
+ExecStart=/usr/bin/ssh-agent -s
+ExecStartPost=/usr/bin/ssh-add ~/.ssh/id_ed25519
+
+[Install]
+WantedBy=default.target

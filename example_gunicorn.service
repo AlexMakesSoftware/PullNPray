@@ -1,0 +1,12 @@
+[Unit]
+Description=gunicorn daemon for Django project your_app_name
+After=network.target
+
+[Service]
+User=$(whoami)
+Group=$(id -gn)
+WorkingDirectory=/path/to/app_directory
+ExecStart=/path/to/virtualenv/bin/gunicorn --pythonpath /path/to/app_directory --bind 0.0.0.0:8000 --workers 4 your_app_name.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
