@@ -29,3 +29,9 @@ TODO: write up how you added a read-only deploy key for your ssh git clone comma
 You MUST read these instructions, especially the bit about "Using multiple repositories on one server": https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys
 
 
+NOTES:
+I need to change this a little.
+You need to put the deployed code under var/www and have it in the group 'deployed_apps'.
+Move the poller to /opt/poller and again, same group probably.
+Create a user called gunicorn in the group depoyed_apps. Add your username to deployed_apps group too.
+make sure you use the gunicorn username and deployed_apps group for installing the gunicorn service.
