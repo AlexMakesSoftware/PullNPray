@@ -36,7 +36,8 @@ echo "## comparing local copy with remote ##"
 if [ -n "$(git fetch --dry-run 2>&1)" ]; then
     echo "Updating the project..."
     #Update main locally with the upstream origin.
-    git pull origin main
+    git fetch origin
+    git reset --hard origin/main
 
     # Run the deployment script
     if [ -f "$deployment_script" ]; then
