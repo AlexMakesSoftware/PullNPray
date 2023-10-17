@@ -4,6 +4,8 @@ THis is a collection of scripts to help with the setup of a continual delivery p
 
 NOTE: Don't just run these scripts as-is, you need to configure things manually for your setup.
 
+Why 'Pull and pray'? These scripts don't *check* you've done anything sensible like *actually tested your code.* It makes no assumptions other than the code is there and it's ready for deployment - hence the term 'pull and pray'.
+
 ## Git Repo Poller
 The poll_git.sh script should be placed somewhere sensible on the system and the permissions changed to make it executable.
 ```
