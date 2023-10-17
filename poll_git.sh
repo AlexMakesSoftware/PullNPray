@@ -41,7 +41,7 @@ if [ -n "$(git fetch --dry-run 2>&1)" ]; then
     # Run the deployment script
     if [ -f "$deployment_script" ]; then
         "$deployment_script" > "$notification_dir/deployment_output.txt" 2>&1
-        echo "Deployment completed successfully." > "$notification_dir/notification.txt"
+        #TODO: we could add version notes, maybe append them to that file?
 
         # Generate a rollback script
         echo "#!/bin/bash" > "$rollback_dir/rollback_script.sh"
