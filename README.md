@@ -25,4 +25,5 @@ This is mentioned in the polling file as $HOME/poller/$project/deploy.sh.
 Typically, you want your nginx serving content from something like gunicorn, both of which you probably want to run as services. Configuring that is up to you but you want a script in deploy.sh which will stop and restart everything you need to. An example is provided in this project called 'example_install_gunicorn.sh'. You will need to adapt it for your individual needs, and provide a gunicorn.service file, as per your needs (an example is provided in example_gunicorn.service).
 
 
+TODO: write up how you added a read-only deploy key for your ssh git clone command.
 
