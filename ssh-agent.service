@@ -1,9 +1,9 @@
 [Unit]
-Description=SSH Agent
-
+Description=SSH Agent for read-only deployment
 [Service]
-ExecStart=/usr/bin/ssh-agent -s
-ExecStartPost=/usr/bin/ssh-add ~/.ssh/id_ed25519
-
+Type=simple
+Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
+ExecStartPost=/usr/bin/ssh-add /etc/ssh-agent-service/deploy-keys/deploy_key_ed25519
 [Install]
 WantedBy=default.target
