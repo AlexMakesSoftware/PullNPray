@@ -87,7 +87,7 @@ This will check your deployment script works too.
 
 Check your app runs properly now.
 
-If all has gone according to plan... then congratualations. You can now install the poller as a cron job.
+If all has gone according to plan... then congratulations! You can now install the poller as a cron job.
 
 ```
 sudo nano /etc/crontab
