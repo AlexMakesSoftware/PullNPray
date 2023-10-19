@@ -94,11 +94,52 @@ sudo nano /etc/crontab
 ```
 Add this line:
 ```
-*/5 * * * * gunicorn /path/to/your/poller_script.sh
+*/5 * * * * gunicorn /opt/poller/todo_django/poll_git.sh >> /var/log/git_poller.log 2>> /var/log/git_poller.log
+
 ```
 That will run the poller every five minutes.
-Finally:
+
+Note that the errors and output will be redirected to a file /var/log/git_oller.log. You need to change the ownership and permissions of that file so that gunicorn has ownership and write access to it, or else that will cause the cron job to fail to run. So:
+
+```
+chown gunicorn:deployed_apps /var/log/git_poller.log
+chmod g+rw /var/log/git_poller.log
+```
+
+Then:
 ```
 sudo systemctl restart cron
 ```
 To make your changes active.
+
+## Being considerate:
+We don't really want to fill up the hard drive with lots of script output, so set up logrotate to rotate the log file for the cron job. Assuming it's installed this should be as simple as placing a definition in /etc/logrotate.d/
+```
+/var/log/git_poller.log {
+    daily
+    rotate 7
+    compress
+    maxage 14
+    missingok
+    notifempty
+    create 644 gunicorn deployed_apps
+}
+```
+In this config, logs older than seven days will be compressed and any odler than 14 will be deleted.
+
+## Known issues:
+For some reason, I haven't been able to get the GIT_SSH_COMMAND to set properly in the ssh-agent.service. So if you want to test that gunicorn can connect to the git repo properly, you'll need to create a script and run it as gunicorn like so, script:
+
+```
+#!/bin/bash
+export GIT_SSH_COMMAND="ssh -F /etc/ssh-agent-service/gunicorn_config -o IdentitiesOnly=yes -i /etc/ssh-agent-service/deploy-keys/deploy_key_ed25519"
+ssh -T github.com-repo-todo
+```
+Get a shell as gunicorn and run the script.
+```
+chmod +x test_script.sh
+chown gunicorn:depoyed_apps test_script.sh
+sudo -u gunicorn -s
+./test_script.sh
+```
+You should see a welcome message rather than an error.

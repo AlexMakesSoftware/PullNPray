@@ -7,6 +7,10 @@ deployment_script="/opt/poller/$project/deploy.sh"
 notification_dir="/opt/poller/$project/notifications/"
 rollback_dir="/opt/poller/$project/rollback/"
 lock_file="/tmp/poll.$project.lock"
+
+#Work around: I haven't managed to get the service definition to work for this env variable, so stick it here instead:
+export GIT_SSH_COMMAND="ssh -F /etc/ssh-agent-service/gunicorn_config -o IdentitiesOnly=yes -i /etc/ssh-agent-service/deploy-keys/deploy_key_ed25519"
+
 # Check if the lock file exists
 if [ -e "$lock_file" ]; then
     echo "Lock file already exists. Exiting."
